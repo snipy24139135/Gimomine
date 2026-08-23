@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>24 August — For Gimo 🌙</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  background:#090a16;
+  color:#f1f3f9;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  overflow:hidden;
+}
+
+.page{
+  position:fixed;
+  inset:0;
+  overflow-y:auto;
+  padding:50px 0;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(20px) scale(0.98);
+  transition:all .6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  background:
+    radial-gradient(circle at 50% 0%, #2d1b4e 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, #132347 0%, transparent 45%),
+    linear-gradient(160deg, #090a16, #0d1127 60%, #05060d);
+}
+
+.page.active{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0) scale(1);
+}
+
+.wrap{
+  width:min(900px,90%);
+  margin:auto;
+}
+
+.center{
+  min-height:calc(100vh - 100px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.eyebrow{
+  color:#9d81e8;
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.date{
+  color:#c0a1fb;
+  font-size:14px;
+  letter-spacing:8px;
+  font-weight:600;
+  margin-bottom:15px;
+}
+
+h1{
+  font-size:clamp(40px,8vw,75px);
+  line-height:1.05;
+  margin:15px 0;
+  font-weight:800;
+}
+
+h1 span, h2 span{
+  background: linear-gradient(135deg, #c084fc, #f472b6, #38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:0 0 35px rgba(192,132,252,0.3);
+}
+
+h2{
+  font-size:clamp(28px,5vw,50px);
+  line-height:1.2;
+  margin:15px 0;
+  font-weight:800;
+}
+
+.subtext{
+  color:#a5b4fc;
+  font-size:15px;
+  margin-bottom:20px;
+  font-style:italic;
+}
+
+.wish-box{
+  max-width:700px;
+  color:#c7d2fe;
+  line-height:1.8;
+  margin-top:20px;
+  font-size:16px;
+}
+
+button{
+  margin-top:30px;
+  padding:15px 34px;
+  border:0;
+  border-radius:100px;
+  color:#fff;
+  background:linear-gradient(135deg, #8b5cf6, #ec4899);
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(139, 92, 246, 0.4);
+  transition:all .3s ease;
+}
+
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(236, 72, 153, 0.5);
+}
+
+.qualities{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:30px;
+}
+
+.quality{
+  padding:25px;
+  border:1px solid rgba(255, 255, 255, 0.08);
+  border-radius:20px;
+  background:rgba(255, 255, 255, 0.03);
+  backdrop-filter:blur(15px);
+  text-align:left;
+}
+
+.quality.full{
+  grid-column:1 / -1;
+}
+
+.quality h3{
+  font-size:18px;
+  margin-bottom:12px;
+  color:#f3e8ff;
+}
+
+.quality p{
+  color:#cbd5e1;
+  line-height:1.8;
+  font-size:14.5px;
+  margin-bottom:8px;
+}
+
+.traits-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));
+  gap:12px;
+  margin:25px 0;
+  width:100%;
+  max-width:650px;
+}
+
+.trait-tag{
+  padding:12px 16px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  font-weight:600;
+  color:#e0e7ff;
+  font-size:14px;
+}
+
+.letterBox{
+  max-width:800px;
+  margin:25px auto 0;
+  padding:35px;
+  border-radius:24px;
+  background:linear-gradient(145deg, #ffffff, #f3e8ff);
+  color:#1e1b4b;
+  line-height:1.9;
+  text-align:left;
+  box-shadow:0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.letterBox p{
+  margin-bottom:18px;
+  font-size:15px;
+}
+
+.signature{
+  color:#7e22ce;
+  font-weight:700;
+  margin-top:20px;
+}
+
+.important{
+  max-width:750px;
+  margin:auto;
+  color:#e2e8f0;
+  font-size:16px;
+  line-height:1.9;
+}
+
+.important p{
+  margin-bottom:18px;
+}
+
+.bullet-list{
+  text-align:left;
+  max-width:650px;
+  margin:25px auto;
+  list-style:none;
+}
+
+.bullet-list li{
+  padding:10px 16px;
+  margin-bottom:8px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  font-size:15px;
+  color:#e2e8f0;
+  line-height:1.6;
+}
+
+.lock{
+  font-size:55px;
+  margin-bottom:15px;
+}
+
+.passwordPage input{
+  width:min(350px,90%);
+  margin-top:20px;
+  padding:15px 20px;
+  border-radius:100px;
+  border:1px solid rgba(255, 255, 255, 0.15);
+  outline:none;
+  background:rgba(255, 255, 255, 0.05);
+  color:#fff;
+  text-align:center;
+  font-size:15px;
+}
+
+.passwordPage input:focus{
+  border-color:#c084fc;
+  box-shadow:0 0 15px rgba(192, 132, 252, 0.3);
+}
+
+.error{
+  min-height:22px;
+  margin-top:10px;
+  color:#f472b6;
+  font-weight:600;
+  font-size:14px;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-top:30px;
+}
+
+.photo{
+  overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(255, 255, 255, 0.1);
+  background:rgba(255, 255, 255, 0.03);
+  text-align:left;
+}
+
+.photo img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  display:block;
+}
+
+.photo p{
+  padding:14px;
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.6;
+}
+
+@keyframes floatUp{
+  0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+  15%{ opacity:.6; }
+  100%{ transform:translateY(-110vh) rotate(360deg); opacity:0; }
+}
+
+@media(max-width:650px){
+  .qualities, .gallery{ grid-template-columns:1fr; }
+  .letterBox{ padding:22px; }
+  .important{ font-size:15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<section class="page active" id="page1">
+  <div class="wrap center">
+    <div class="eyebrow">🌙 THE BEGINNING</div>
+    <div class="subtext">For the girl who deserves a little more than a birthday wish</div>
+    <div class="date">24 AUGUST</div>
+    <h1>Happy Birthday<br><span>GIMO 🤍</span></h1>
+    <div class="wish-box">
+      <p>“For the girl who deserves a little more than just a birthday wish…”</p><br>
+      <p>🌙 You deserve every beautiful thing life has to offer. ✨</p>
+      <p>🤍 I hope this year brings you the happiness you quietly wish for. 🌷</p>
+      <p>🫶 May you always keep that beautiful heart of yours, no matter what. 🌸</p>
+      <p>❤️ And no matter where life takes us, I’ll always be grateful I found you. 🥹✨</p>
+    </div>
+    <button onclick="nextPage()">BEGIN ✦</button>
+  </div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page" id="page2">
+  <div class="wrap center">
+    <div class="eyebrow">BEFORE YOU CONTINUE… 🌙</div>
+    <div class="wish-box" style="font-size:20px; line-height:1.8;">
+      <p>“There are some people who enter your life quietly and somehow become a part of your favorite memories…”</p>
+      <br>
+      <h2 style="margin:10px 0;"><span>YOU. 🤍</span></h2>
+    </div>
+    <button onclick="nextPage()">COME, GIMO →</button>
+  </div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="page3">
+  <div class="wrap">
+    <div class="eyebrow center">THE LITTLE THINGS</div>
+    <h2 class="center">I Notice About <span>You</span></h2>
+    
+    <div class="qualities">
+      <article class="quality">
+        <h3>😊 SMILE</h3>
+        <p>Her smile has a way of making even the ordinary moments feel magical. 🌸✨</p>
+        <p>It’s the kind of smile that can make my worst days feel a little better. 🥹🤍</p>
+        <p>There’s something so warm and genuine about it that words can’t quite explain. 🌷🫶</p>
+        <p>Whenever she smiles, it feels like everything around her becomes a little brighter. ☀️🌙</p>
+        <p>And honestly, her smile will always be one of my favourite things about her. ❤️🥰</p>
+      </article>
+
+      <article class="quality">
+        <h3>👀 EYES</h3>
+        <p>Her eyes have a quiet kind of magic that words can’t really describe. 👀✨</p>
+        <p>They hold so much warmth, softness, and emotion. 🥹🤍</p>
+        <p>Sometimes, one look from her says more than a thousand words ever could. 🌙🫶</p>
+        <p>I could get lost in them without even realizing how much time has passed. 💫</p>
+        <p>And honestly, her eyes are one of those little things I could never stop admiring. ❤️🥰</p>
+      </article>
+
+      <article class="quality">
+        <h3>💇 HAIR</h3>
+        <p>Her hair falls so beautifully, like every strand was meant to be there. 🌸✨</p>
+        <p>There’s something effortlessly beautiful about the way it frames her face. 🤍🌙</p>
+        <p>Sometimes, even the simplest glimpse of her hair catches my attention. 🥹🫶</p>
+        <p>It adds a little more magic to the person who already feels so special to me. 💫💕</p>
+        <p>And honestly, I could never get tired of admiring the way it looks on her. ❤️🥰</p>
+      </article>
+
+      <article class="quality">
+        <h3>🧠 YOUR MIND</h3>
+        <p>I love the way your mind sees things a little differently. 🧠✨</p>
+        <p>Your thoughts carry a depth and warmth that make you truly special. 🌙🤍</p>
+        <p>You think with both your heart and your mind, and that’s something I deeply admire. 🫶🌸</p>
+        <p>The way you understand people, dream about your future, and keep moving forward inspires me. 💫</p>
+        <p>And honestly, your beautiful mindset is one of the many reasons you’re so unforgettable to me. ❤️🥹</p>
+      </article>
+
+      <article class="quality">
+        <h3>🤍 YOUR NATURE</h3>
+        <p>Your personality is one of the things that makes you so incredibly special. 🌷✨</p>
+        <p>You have a kindness that you give so naturally, without ever expecting anything in return. 🤍🫶</p>
+        <p>The way you care about people, even in the smallest moments, says so much about your heart. 🥹🌸</p>
+        <p>You carry a beautiful mix of softness, strength, and warmth wherever you go. 🌙💫</p>
+        <p>And honestly, your kind heart is something I’ll always admire, cherish, and love about you. ❤️🥰</p>
+      </article>
+
+      <article class="quality full">
+        <h3>❤️ YOUR HEART</h3>
+        <p>Your heart is one of the most beautiful things about you. ❤️🌷</p>
+        <p>It’s full of kindness, warmth, and a love that feels so genuine. 🥹🤍</p>
+        <p>You care deeply, love sincerely, and always find little ways to make people feel special. 🫶✨</p>
+        <p>There’s a softness in your heart that makes being around you feel like home. 🏡🌙</p>
+        <p>And if there’s one thing I hope never changes about you, it’s that beautiful heart of yours. ❤️🥰</p>
+      </article>
+    </div>
+
+    <div class="center" style="min-height:120px; margin-top:20px;">
+      <p class="subtext">“AND THERE’S SOMETHING ELSE I WANT YOU TO KNOW…”</p>
+      <button onclick="nextPage()">KEEP READING →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4 -->
+<section class="page" id="page4">
+  <div class="wrap center">
+    <div class="eyebrow">IF I HAD TO DESCRIBE YOU…</div>
+    <h2>GIMO IS…</h2>
+
+    <div class="traits-grid">
+      <div class="trait-tag">Stubborn.</div>
+      <div class="trait-tag">Adorable.</div>
+      <div class="trait-tag">Dramatic.</div>
+      <div class="trait-tag">Caring.</div>
+      <div class="trait-tag">Funny.</div>
+      <div class="trait-tag">Beautiful.</div>
+      <div class="trait-tag">Irreplaceable.</div>
+    </div>
+
+    <div class="important" style="margin-top:15px;">
+      <p style="color:#c084fc; font-style:italic;">“But somehow, none of these words are enough.”</p>
+      <p>She is more than just the girl I love; she is a feeling I never want to lose. ❤️🥹</p>
+      <p>She is the warmth in my happiest moments and the comfort I look for on my hardest days. 🌙🤍</p>
+      <p>There’s something about the way she loves, cares, dreams, and simply exists that makes her impossible to replace. 🫶✨</p>
+      <p>She may not always realize how special she is, but I hope she knows that the world feels a little more beautiful because she’s in it. 🌸💫</p>
+      <p>And to me, she will always be the girl who made my heart feel like it had finally found its home. 🏡❤️</p>
+    </div>
+
+    <button onclick="nextPage()">READ MY LETTER →</button>
+  </div>
+</section>
+
+<!-- PAGE 5 -->
+<section class="page" id="page5">
+  <div class="wrap">
+    <div class="eyebrow center">💌 MY LETTER</div>
+    <h2 class="center">Dear <span>Gimi…</span></h2>
+
+    <div class="letterBox">
+      <p><strong>My Love, ❤️</strong></p>
+      <p>I’ve been thinking about what I could write for your birthday, and honestly, I don’t think words will ever be enough to explain what you mean to me. Still, I want to try, because you deserve to know how deeply you are loved, appreciated, and cherished. 🥹🤍</p>
+      <p>When I look back at everything we’ve shared, I realize how many little moments have become some of the most precious memories of my life. The conversations, the laughter, the silly moments, the misunderstandings, the moments when we simply stayed there for each other — all of them mean something to me. 🌙🫶</p>
+      <p>You are beautiful, but it’s not just your smile, your eyes, or your hair that makes you beautiful. 🌸✨ It’s the person you are behind all of that. It’s your heart, your kindness, your thoughts, your way of caring, and the little things you do without even realizing how much they mean to someone.</p>
+      <p>I love your smile because it can make everything around you feel brighter. 😊❤️ I love your eyes because sometimes they say things that words never could. 👀✨ I love the way you think, the way you see the world, and the dreams you carry inside your heart. 🌷💫 And more than anything, I love the person you are when nobody is watching.</p>
+      <p>You have a heart that deserves to be protected and loved. 🤍 You care deeply, you feel deeply, and you have a kindness that makes you different. Sometimes I wish you could see yourself through my eyes, even for a moment, because maybe then you would understand just how special you really are. 🥹🌙</p>
+      <p>There will always be things in life that we cannot control. There will be difficult days, changes, distance, misunderstandings, and moments when things don’t go exactly the way we imagined. But through all of that, I hope you never forget one thing — you will always have a very special place in my heart. ❤️</p>
+      <p>I don’t want to love only the perfect parts of you. I want to know your fears, your dreams, your insecurities, your little habits, your random thoughts, and all those tiny things that make you you. 🫶🌸 I want to be there for your good days, but I also want to be someone you can lean on when the days aren’t so good.</p>
+      <p>Your birthday isn’t just a celebration of another year. 🎂✨ It is a reminder that the world became a little more beautiful because you were born. And somehow, my world became even more beautiful because our paths crossed. 🌎❤️</p>
+      <p>I hope this new year of your life gives you reasons to smile more, dreams worth chasing, people who appreciate your heart, and countless moments that make you genuinely happy. 🌷💫 I hope you become everything you dream of becoming, while never losing the beautiful person you already are.</p>
+      <p>And if someday you look back at this letter, I hope you remember how loved you were in this moment. 🥹🤍 Not because of how you looked, not because of what you could give me, but simply because you were you.</p>
+      <p>Thank you for being a part of my life. Thank you for every smile, every conversation, every memory, every little moment, and even every difficult one that taught us something. 🫶🌙</p>
+      <p>I don’t know exactly what the future has written for us, but I know one thing — whatever happens, I will always be grateful that I got to know you, love you, and call you mine. ❤️</p>
+      <p>Happy Birthday, my love. 🎂🎀❤️</p>
+      <p>May you always smile the way you do, dream without limits, love without fear, and remember just how precious you are. 🌸✨</p>
+      
+      <p class="signature">With all my heart,<br>Always yours. ❤️</p>
+
+      <hr style="border:0; border-top:1px dashed #cbd5e1; margin:25px 0;">
+
+      <p style="font-style:italic; font-weight:600; color:#6b21a8;">“If you ever have a day where you forget how special you are, come back here…”</p>
+      <p>If you ever have a day where you forget how special you are, come back here. 🤍✨</p>
+      <p>Read these words and remember that there is someone who sees so much more in you than you sometimes see in yourself. 🥹🌷</p>
+      <p>Remember your beautiful heart, your kindness, your smile, your strength, and all the little things that make you you. 🫶🌙</p>
+      <p>You don’t have to be perfect to be loved, and you never have to prove your worth to anyone. ❤️</p>
+      <p>On the days when you doubt yourself, I hope these words remind you that you are enough, you are precious, and you are loved more than you know. 🥺💫</p>
+    </div>
+
+    <div class="center" style="min-height:100px;">
+      <button onclick="nextPage()">KEEP GOING →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6 -->
+<section class="page" id="page6">
+  <div class="wrap center">
+    <div class="eyebrow">A REMINDER</div>
+    <h2>GIMO,<br><span>YOU MATTER. 🤍</span></h2>
+
+    <div class="important">
+      <p>If you ever have a day when you forget how special you are, come back here. 🥺🤍 Read these words and remember that you are so much more than your bad days 🌧️, your mistakes, or the things you doubt about yourself. 🌷✨ There is so much beauty in who you are, even in the parts you sometimes fail to notice. 🫶🏻🌙 And no matter how hard the day feels, please remember—you are deeply loved ❤️, appreciated 🥹, and worth so much more than you know. 🫂💗✨</p>
+    </div>
+
+    <ul class="bullet-list">
+      <li>🌷 She’s important.</li>
+      <li>😊 Her happiness matters.</li>
+      <li>🌙 Her dreams are worth chasing.</li>
+      <li>🫶🏻 Her presence makes a difference.</li>
+      <li>🤝🏻 Her friendship is precious.</li>
+      <li>✨ She doesn’t need to be perfect to be loved.</li>
+      <li>🌧️ Her bad days don’t make her less special.</li>
+      <li>💗 Her feelings matter.</li>
+      <li>🦋 Her growth deserves to be celebrated.</li>
+      <li>🏡 She deserves to feel safe, loved, and understood.</li>
+      <li>🌸 Her kindness is something beautiful.</li>
+      <li>❤️ Her existence matters more than she realizes.</li>
+      <li>🫂 She is loved, even on the days she struggles to love herself.</li>
+      <li>♾️ She will always be someone worth choosing, appreciating, and protecting.</li>
+    </ul>
+
+    <div class="important" style="margin-top:20px;">
+      <p style="color:#f472b6; font-weight:600;">Whenever you forget your worth, come back here. 🫂🤍 Read this again and remember—you are important, you are loved, and you are enough exactly as you are. 🌷✨ Your bad days, mistakes, and insecurities can never take away the beautiful person you are. 🌙🦋 You deserve happiness, love, kindness, and every beautiful thing life has to offer. ❤️‍🩹🌸 Never forget how much you matter. 🥹❤️</p>
+    </div>
+
+    <button onclick="nextPage()">Unlock Secret 1 🔐</button>
+  </div>
+</section>
+
+<!-- SECRET 1 / PAGE 7 -->
+<section class="page" id="page7">
+  <div class="wrap center passwordPage">
+    <div class="lock">🔐</div>
+    <div class="eyebrow">SECRET 1</div>
+    <h2>A Little <span>Secret</span></h2>
+    <p class="subtext">“Some memories aren’t meant for everyone.”</p>
+    <p style="color:#cbd5e1; font-size:14px;">“If you’ve made it this far, I think you’ve earned access to the next part.”</p>
+    <p class="subtext" style="margin-top:15px;">HINT: “Something only Gimo would know.”</p>
+
+    <input id="pass1" type="password" placeholder="Enter password">
+    <button onclick="unlockOne()">Unlock ♡</button>
+    <div id="error1" class="error"></div>
+  </div>
+</section>
+
+<!-- PAGE 8 (PUBLIC MEMORIES) -->
+<section class="page" id="page8">
+  <div class="wrap">
+    <div class="eyebrow center">📸 OUR MEMORIES</div>
+    <h2 class="center">Public <span>Memories</span></h2>
+
+    <div class="gallery">
+      <div class="photo">
+        <img src="public1.JPG" alt="The Beginning">
+        <p><strong>THE BEGINNING:</strong> “Where it started”</p>
+      </div>
+      <div class="photo">
+        <img src="public2.JPG" alt="The Random Ones">
+        <p><strong>THE RANDOM ONES:</strong> “The silly ones”</p>
+      </div>
+      <div class="photo">
+        <img src="public3.JPG" alt="The Pretty Ones">
+        <p><strong>THE PRETTY ONES:</strong> “One of my favorites”</p>
+      </div>
+      <div class="photo">
+        <img src="public4.JPG" alt="The Ones I Keep Coming Back To">
+        <p><strong>THE ONES I KEEP COMING BACK TO:</strong> “This one means something to me”</p>
+      </div>
+    </div>
+
+    <div class="center" style="min-height:100px;">
+      <button onclick="nextPage()">Unlock Secret 2 🔒</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECRET 2 / PAGE 9 -->
+<section class="page" id="page9">
+  <!-- LOCK SCREEN -->
+  <div id="p9-lock" class="wrap center passwordPage">
+    <div class="lock">🔒</div>
+    <div class="eyebrow">SECRET 2</div>
+    <h2>Only For <span>Gimo.</span></h2>
+    <p class="subtext">“Okay… this part stays between us.”</p>
+
+    <input id="pass2" type="password" placeholder="Second password">
+    <button onclick="unlockTwo()">Open Private Secret ♡</button>
+    <div id="error2" class="error"></div>
+  </div>
+
+  <!-- PRIVATE PHOTOS CONTENT -->
+  <div id="p9-content" class="wrap" style="display:none;">
+    <div class="eyebrow center">🔒 PRIVATE</div>
+    <h2 class="center">Personal <span>Memories ❤️</span></h2>
+
+    <div class="gallery">
+      <div class="photo">
+        <img src="personal1.JPG" alt="Private photo 1">
+        <p>“This one…” ❤️</p>
+      </div>
+      <div class="photo">
+        <img src="personal2.JPG" alt="Private photo 2">
+        <p>“Because I still smile when I see it.”</p>
+      </div>
+      <div class="photo">
+        <img src="personal3.JPG" alt="Private photo 3">
+        <p>“Some memories don’t need an explanation.”</p>
+      </div>
+      <div class="photo">
+        <img src="personal4.JPG" alt="Private photo 4">
+        <p>Personal memory ❤️</p>
+      </div>
+    </div>
+
+    <div class="center" style="min-height:100px;">
+      <button onclick="nextPage()">AND NOW… WE’RE AT THE END →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 10 -->
+<section class="page" id="page10">
+  <div class="wrap center">
+    <div class="eyebrow">AT THE END</div>
+    <h2>HAPPY BIRTHDAY<br><span>GIMO ❤️</span></h2>
+
+    <div class="important" style="max-width:700px;">
+      <p>“But your birthday isn’t really about this website. It’s about you.”</p>
+    </div>
+
+    <ul class="bullet-list">
+      <li><strong>Her happiness</strong> — Because seeing her genuinely happy means more to me than anything. 🥹❤️</li>
+      <li><strong>Her dreams</strong> — Because every dream she carries deserves to be believed in and supported. 🌙✨</li>
+      <li><strong>Her future</strong> — Because I want her future to be full of peace, success, love, and everything beautiful. 🦋🤍</li>
+      <li><strong>Her peace</strong> — Because she deserves a life where her heart feels safe, calm, and loved. 🫂🌷</li>
+      <li><strong>Everything she deserves</strong> — Because she deserves all the love, happiness, respect, and beautiful moments life can give her. ❤️✨</li>
+    </ul>
+
+    <div class="important" style="margin-top:20px;">
+      <p style="color:#c084fc; font-weight:600; font-size:17px;">Whenever you forget how much you matter, I’ll be here to remind you. 🫂❤️ And whenever you forget how beautiful your heart is, I’ll remind you again and again. 🌸✨</p>
+    </div>
+
+    <button onclick="nextPage()">✨ WAIT… ONE MORE THING</button>
+  </div>
+</section>
+
+<!-- FINAL SURPRISE -->
+<section class="page" id="page11">
+  <div class="wrap center">
+    <div class="eyebrow">FINAL SURPRISE</div>
+    <h2>❤️ FINAL SURPRISE</h2>
+
+    <div class="wish-box" style="margin-bottom:20px; font-size:18px;">
+      <p>“You really thought I’d let your birthday end there?” 🥹❤️</p>
+    </div>
+
+    <!-- Final Photo Holder -->
+    <div class="photo" style="max-width:500px; margin:auto;">
+      <img src="final.JPG" alt="Final Surprise Photo">
+      <p style="padding:18px; font-size:15px; text-align:center; line-height:1.7;">
+        “I made all of this with more love than I could ever put into words. ❤️✨ Every little page, every little message, every moment here was made just for you. Because you’re not just someone I love—you’re someone I’m genuinely grateful to have in my life. 🫂🌷”
+      </p>
+    </div>
+
+    <div class="important" style="margin-top:30px;">
+      <p style="color:#a5b4fc; font-style:italic;">“And if you ever wonder who’s lucky to know you…”</p>
+      <h3 style="color:#f472b6; font-size:22px; margin-top:5px;">— It’s me. ❤️<br><span style="font-size:16px; color:#e2e8f0; font-weight:normal;">Someone who is incredibly lucky to have you. 🥹🫶🏻</span></h3>
+    </div>
+
+    <div class="eyebrow" style="margin-top:40px;">🌙 THE END</div>
+  </div>
+</section>
+
+<script>
+const PASSWORD_ONE = "gimo2402";
+const PASSWORD_TWO = "Gimomine";
+let currentPage = 1;
+
+function showPage(number){
+  document.querySelectorAll(".page").forEach(function(page){
+    page.classList.remove("active");
+  });
+  const page = document.getElementById("page" + number);
+  if(page){
+    page.classList.add("active");
+    currentPage = number;
+    page.scrollTop = 0;
+  }
+}
+
+function nextPage(){
+  if(currentPage === 6){ showPage(7); return; }
+  if(currentPage === 8){ showPage(9); return; }
+  if(currentPage < 11){ showPage(currentPage + 1); }
+}
+
+function unlockOne(){
+  const password = document.getElementById("pass1").value.trim();
+  const error = document.getElementById("error1");
+  if(password === PASSWORD_ONE){
+    error.textContent = "";
+    showPage(8);
+  } else {
+    error.textContent = "Wrong password. ❤️";
+  }
+}
+
+function unlockTwo(){
+  const password = document.getElementById("pass2").value.trim();
+  const error = document.getElementById("error2");
+  if(password === PASSWORD_TWO){
+    error.textContent = "";
+    document.getElementById("p9-lock").style.display = "none";
+    document.getElementById("p9-content").style.display = "block";
+  } else {
+    error.textContent = "That's not the secret. ❤️";
+  }
+}
+
+document.getElementById("pass1").addEventListener("keydown", function(e){ if(e.key === "Enter") unlockOne(); });
+document.getElementById("pass2").addEventListener("keydown", function(e){ if(e.key === "Enter") unlockTwo(); });
+
+function createParticle(){
+  const particle = document.createElement("div");
+  particle.textContent = ["♡","✦","✧","♥"][Math.floor(Math.random() * 4)];
+  particle.style.position = "fixed";
+  particle.style.left = Math.random() * 100 + "vw";
+  particle.style.bottom = "-30px";
+  particle.style.color = "#c084fc";
+  particle.style.opacity = ".6";
+  particle.style.fontSize = 14 + Math.random() * 20 + "px";
+  particle.style.pointerEvents = "none";
+  particle.style.zIndex = "999";
+  particle.style.animation = "floatUp 7s linear forwards";
+  document.body.appendChild(particle);
+  setTimeout(function(){ particle.remove(); }, 7000);
+}
+setInterval(createParticle, 850);
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen</title>
+  </head>
+  <body>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
